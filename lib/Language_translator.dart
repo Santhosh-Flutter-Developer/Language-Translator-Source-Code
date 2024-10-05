@@ -11,9 +11,9 @@ class LanguageTranslator extends StatefulWidget {
 }
 
 class _LanguageTranslatorState extends State<LanguageTranslator> {
-  var languages =["Hindi", "English","Tamil"];
-  var originLanguage ="From";
-  var destinationLanguage ="To";
+  var languages =["Hindi", "English","Tamil","Spanish","French","German","Chinese","Japanese","Korean","Russian","Arabic","Portuguese","Bengali","Urdu","Italian","Turkish","Vietnamese","Thai","Indonesian","Malay","Greek","Dutch","Swedish","Polish","Persian","Hebrew","Romanian","Czech","Danish","Finnish","Norwegian","Hungarian","Slovak"];
+  var originLanguage ="English";
+  var destinationLanguage ="Tamil";
   TextEditingController translatedController = TextEditingController();
   TextEditingController languageController = TextEditingController();
 
@@ -34,16 +34,77 @@ if(src=='--' || dest=='--'){
 }
 
 String getLanguageCode (String language){
-  switch(language){
-case "English":
-return "en";
-case "Hindi":
-return "hi";
-case "Tamil":
-return "ta";
-default:
-return "--";
-  }
+switch(language){
+  case "English":
+    return "en";
+  case "Hindi":
+    return "hi";
+  case "Tamil":
+    return "ta";
+  case "Spanish":
+    return "es";
+  case "French":
+    return "fr";
+  case "German":
+    return "de";
+  case "Chinese":
+    return "zh";
+  case "Japanese":
+    return "ja";
+  case "Korean":
+    return "ko";
+  case "Russian":
+    return "ru";
+  case "Arabic":
+    return "ar";
+  case "Portuguese":
+    return "pt";
+  case "Bengali":
+    return "bn";
+  case "Urdu":
+    return "ur";
+  case "Italian":
+    return "it";
+  case "Turkish":
+    return "tr";
+  case "Vietnamese":
+    return "vi";
+  case "Thai":
+    return "th";
+  case "Indonesian":
+    return "id";
+  case "Malay":
+    return "ms";
+  case "Greek":
+    return "el";
+  case "Dutch":
+    return "nl";
+  case "Swedish":
+    return "sv";
+  case "Polish":
+    return "pl";
+  case "Persian":
+    return "fa";
+  case "Hebrew":
+    return "he";
+  case "Romanian":
+    return "ro";
+  case "Czech":
+    return "cs";
+  case "Danish":
+    return "da";
+  case "Finnish":
+    return "fi";
+  case "Norwegian":
+    return "no";
+  case "Hungarian":
+    return "hu";
+  case "Slovak":
+    return "sk";
+  default:
+    return "--";
+}
+
 }
 
   @override
@@ -52,7 +113,9 @@ return "--";
     
       appBar: AppBar(
         backgroundColor:const Color(0xFF8A39EF),
-        title:const Text("Language Translator"),
+        title:const Text("Language Translator",style: TextStyle(
+          color: Colors.white
+        ),),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -65,6 +128,8 @@ child: Column(
         children: [
     DropdownButton(
       focusColor: Colors.white,
+      value: originLanguage,
+      menuMaxHeight: 200,
       iconDisabledColor: Colors.black,
       iconEnabledColor: Colors.black,
       hint: Text(originLanguage,style:const TextStyle(
@@ -80,12 +145,24 @@ child: Column(
       const SizedBox(
       width: 40,
       ),
-      Icon(Icons.compare_arrows_outlined,color: Colors.black.withOpacity(0.5),size: 30,),
+      InkWell(
+        onTap: (){
+          setState(() {
+          String temp1=originLanguage;
+          String temp2=destinationLanguage;
+          originLanguage=temp2;
+          destinationLanguage=temp1;
+        
+          });
+        },
+        child: Icon(Icons.compare_arrows_outlined,color: Colors.black.withOpacity(0.5),size: 30,)),
       const SizedBox(
       width: 40,
       ),
       DropdownButton(
       focusColor: Colors.white,
+      value: destinationLanguage,
+       menuMaxHeight: 200,
       iconDisabledColor: Colors.black,
       iconEnabledColor: Colors.black,
       hint: Text(destinationLanguage,style:const TextStyle(
@@ -105,7 +182,7 @@ child: Column(
       height: 40,
     ),
     Padding(padding:const EdgeInsets.all(8),child: TextFormField(
-    maxLines: 5,
+    maxLines: 7,
       autofocus: false,
      
       decoration: InputDecoration(
@@ -143,11 +220,11 @@ child: Column(
       ),
       onPressed: (){
       translate(getLanguageCode(originLanguage), getLanguageCode(destinationLanguage), languageController.text.toString());
-      }, child:const Text("Translate")),
+      }, child:const Text("Translate",style: TextStyle(color: Colors.white),)),
     ),
    
      Padding(padding:const EdgeInsets.all(8),child: TextFormField(
-    maxLines: 5,
+    maxLines: 7,
       autofocus: false,
      
       decoration: InputDecoration(
